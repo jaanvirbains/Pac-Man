@@ -1,2 +1,0 @@
-# Pac-Man
-litty
