@@ -1,14 +1,11 @@
+//Jaanvir, Go Diego, Go, and Kaanstantinople
 #include <iostream>
-#include <stdio.h>
-#include <windows.h>
-#include <string>
+#include <stdio.h>//ALLOWS USER TO INPUT FUNCTIONS FROM A USER THROUGH USE OF CONTROLLER (TMP FILE, PRINT, OPEN AND SCAN)
+#include <windows.h>//GET ASNY KEY DEFINES MOVEMENT
 #include <vector>
 
 using namespace std;
 char fap_map[18][32];
-
-
-
 
 char map[18][32] = {
 	" _____________________________ ",
@@ -46,9 +43,9 @@ void gotoxy( short x, short y )
     SetConsoleCursorPosition( hStdout, position ) ;
 }
 
-class entity {
+class communism {
 public:
-	entity( int x, int y ){
+	communism( int x, int y ){
 		this ->x = x;
 		this ->y = y;
 	}
@@ -56,7 +53,6 @@ public:
 	void move_x( int p ){
 		if( map[y][x+p] == ' ' ) x += p;
 	}
-
 
 	void move_y( int p ){
 		if( map[y+p][x] == ' ' ) y += p;
@@ -161,7 +157,7 @@ int main()
 
 	int pts = 0;
 
-	cout<< "Instruction:\n1. Arrow Keys to move Pac-Man\n2. Eat the dots from enemy to gain points\n3. Don't get caught by the enemy\n\n" << endl;
+	cout<< "Instruction:\n1. Arrow Keys to move Shrek\n2. Eat the dots from Lord Farquaad to gain points\n3. Don't get caught by Lord Farquaad\n\n" << endl;
 	printf("H -> Hard\nN -> Normal\nE -> EZ/Noob level\n\nInput : ");
 
 	char diffi;
@@ -222,12 +218,32 @@ int main()
 			walk_queue.pop_back();
 		}
 
-		gotoxy( ex, ey ); cout << "$";
+		gotoxy( ex, ey ); cout << "F";
 
 		if( ex == x && ey == y ){
 			break;
 		}
 
+
+		gotoxy( 32, 18 );
+		gotoxy( 32, 1 ); cout << pts;
+		Sleep( 100 );
+		frame++;
+	}
+
+	system("cls");
+	printf("You Lost?!? What the Shrek my dood?!?\nThanks to you, Farquad has taken ogre!\nWay to go, dorc.\nYour dank score is : %i ", pts );
+	cin.get();
+	cin.get();
+	cin.get();
+	cin.get();
+	cin.get();
+	cin.get();
+	cin.get();
+	cin.get();
+
+	return 0;
+}
 
 		gotoxy( 32, 18 );
 		gotoxy( 32, 1 ); cout << pts;
