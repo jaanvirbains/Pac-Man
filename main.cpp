@@ -245,22 +245,3 @@ int main()
 	return 0;
 }
 
-		gotoxy( 32, 18 );
-		gotoxy( 32, 1 ); cout << pts;
-		Sleep( 100 );
-		frame++;
-	}
-
-	system("cls");
-	printf("You Lost?!? What the Shrek my dood?!? Thanks to you, the capitalists and Farquad have taken ogre! Way to go, dorc, Your dank score is : %i", pts );
-	cin.get();
-	cin.get();
-	cin.get();
-	cin.get();
-	cin.get();
-	cin.get();
-	cin.get();
-	cin.get();
-
-	return 0;
-}
