@@ -76,7 +76,7 @@ private:
 	int y;
 };
 
-struct walk {
+struct sanic {
 	short sanic_count;
 	short x;
 	short y;
@@ -88,9 +88,9 @@ struct target {
 	short y;
 };
 
-vector<target> sanic_speed;
+vector<target> sanic_queue;
 
-vector<walk> MEXArray;
+vector<sanic> MEXArray;
 
 void AddArray( int x, int y, int wc , int back ){
 	if( dab_map[y][x] == ' ' || dab_map[y][x] == '.' ){
@@ -104,7 +104,7 @@ void AddArray( int x, int y, int wc , int back ){
 	}
 }
 
-void FindNemo( int sx, int sy, int x, int y ){
+void FindPath( int sx, int sy, int x, int y ){
 	memcpy( dab_map, map, sizeof(map) );
 	MEXArray.clear();
 	sanic dab;
@@ -117,12 +117,12 @@ void FindNemo( int sx, int sy, int x, int y ){
 	int i = 0;
 	while( i < MEXArray.size() ){
 		if( MEXArray[i].x == x && MEXArray[i].y == y ){
-			sanic_speed.clear();
+			sanic_queue.clear();
 			target dab2;
 			while( MEXArray[i].sanic_count != 0 ){
 				dab2.x = MEXArray[i].x;
 				dab2.y = MEXArray[i].y;
-				sanic_speed.push_back( dab2 );
+				sanic_queue.push_back( dab2 );
 
 				i = MEXArray[i].back;
 			}
@@ -130,10 +130,10 @@ void FindNemo( int sx, int sy, int x, int y ){
 			break;
 		}
 
-		AddArray( MEXArray[i].x+1, MEXArray[i].y, MEXArray[i].walk_count+1, i );
-		AddArray( MEXArray[i].x-1, MEXArray[i].y, MEXArray[i].walk_count+1, i );
-		AddArray( MEXArray[i].x, MEXArray[i].y+1, MEXArray[i].walk_count+1, i );
-		AddArray( MEXArray[i].x, MEXArray[i].y-1, MEXArray[i].walk_count+1, i );
+		AddArray( MEXArray[i].x+1, MEXArray[i].y, MEXArray[i].sanic_count+1, i );
+		AddArray( MEXArray[i].x-1, MEXArray[i].y, MEXArray[i].sanic_count+1, i );
+		AddArray( MEXArray[i].x, MEXArray[i].y+1, MEXArray[i].sanic_count+1, i );
+		AddArray( MEXArray[i].x, MEXArray[i].y-1, MEXArray[i].sanic_count+1, i );
 
 
 		i++;
@@ -145,7 +145,7 @@ void FindNemo( int sx, int sy, int x, int y ){
 
 int main()
 {
-    bool narutorunning = true;
+    bool running = true;
 	int x = 15;
 	int y = 16;
 	int old_x;
@@ -157,7 +157,7 @@ int main()
 
 	int pts = 0;
 
-	cout<< "Instruction:\n1. Utilze the dank and MLG Arrow Keys to move the shrektakular Shrek\n2. Eat the cash spilling from Lord Farquaad's pockets to gain points and to stop flow of capitalism\n3. Don't get caught by Lord Farquaad in order to keep the ideals of Marx alive, also enter the letters E, N, or H, in caps, to select your game mode\n" << endl;
+	cout<< "Instruction:\n1. Arrow Keys to move Shrek\n2. Eat the dots from Lord Farquaad to gain points\n3. Don't get caught by Lord Farquaad\n\n" << endl;
 	printf("H -> Hard\nN -> Normal\nE -> EZ/Noob level\n\nInput : ");
 
 	char diffi;
@@ -178,9 +178,9 @@ int main()
 
 	int frame = 0;
 
-	FindNemo( ex,ey,x,y );
+	FindPath( ex,ey,x,y );
 
-	while( narutorunning ){
+	while( running ){
 		gotoxy( x, y ); cout << " ";
 
 		old_x = x;
@@ -212,10 +212,10 @@ int main()
 		map[ey][ex] = '.';
 		gotoxy( ex, ey ); cout << ".";
 
-		if( frame%speedmod == 0 && sanic_speed.size() != 0 ){
-			ex = sanic_speed.back().x;
-			ey = sanic_speed.back().y;
-			sanic_speed.pop_back();
+		if( frame%speedmod == 0 && sanic_queue.size() != 0 ){
+			ex = sanic_queue.back().x;
+			ey = sanic_queue.back().y;
+			sanic_queue.pop_back();
 		}
 
 		gotoxy( ex, ey ); cout << "F";
@@ -238,6 +238,3 @@ int main()
 
 	return 0;
 }
-
-
-
